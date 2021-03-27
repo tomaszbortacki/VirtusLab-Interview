@@ -56,29 +56,35 @@ const Person = ({
           fetchPersonData();
         }}
       >
-        <li title={name}>{name}</li>
-        <li title={birth_year}>{birth_year}</li>
-        <li title={gender}>{gender}</li>
-        <li>🡻</li>
+        <li title={name}>
+          <span>Name:</span>
+          {name}
+        </li>
+        <li title={birth_year}>
+          <span>Birth year</span>
+          {birth_year}
+        </li>
+        <li title={gender}>
+          <span>Gender:</span>
+          {gender}
+        </li>
+        <li>
+          <div>🡻</div>
+        </li>
       </ul>
       <section className="person__more">
-        <ul>
-          <li>Age: {birth_year.replace("BBY", "")}</li>
-          <li>Height: {height}cm</li>
-          <li>
-            <div>
-              Films <sup>({films.length})</sup>:{" "}
-              {loading ? <Loading zoom={0.5} /> : ""}
-            </div>
-            <ul>
-              {titles
-                ? titles.map((title, key) => {
-                    return <li key={key}>{title}</li>;
-                  })
-                : ""}
-            </ul>
-          </li>
-        </ul>
+        <section className="person__desc">
+          <h3>Age: {birth_year.replace("BBY", "")}</h3>
+          <h3>Height: {height}cm</h3>
+          <h3>Films:</h3>
+          <ul>
+            {titles
+              ? titles.map((title, key) => {
+                  return <li key={key}>{title}</li>;
+                })
+              : ""}
+          </ul>
+        </section>
       </section>
     </section>
   );

@@ -24,6 +24,7 @@
     }
 
     li {
+      position: relative;
       padding: 0.5rem 1.2rem;
       width: 20%;
       flex-basis: 20%;
@@ -33,11 +34,27 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $c11;
+        line-height: 100%;
+        font-size: 0.65em;
+        font-weight: 700;
+        color: $c3;
+        padding: 0.2rem 0.5rem;
+      }
     }
 
     li:first-child {
       width: 50%;
       flex-basis: 50%;
+    }
+
+    li:not(:last-child) {
+      padding-top: 1.6rem;
     }
 
     li:last-child {
@@ -48,6 +65,13 @@
       will-change: transform;
       color: $c3;
       border: none;
+
+      div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 
@@ -56,47 +80,44 @@
     height: 0;
     overflow: hidden;
     transition: opacity $e2;
+  }
 
-    > ul {
-      column-count: 2;
-      column-rule: 1px solid $c11;
-      column-gap: 4rem;
-      padding: 1rem 1.2rem;
+  &__desc {
+    padding: 0.5rem 1.2rem;
 
-      > li {
-        font-size: 1.1em;
-        -webkit-column-break-inside: avoid;
-        page-break-inside: avoid;
-        break-inside: avoid;
+    h3 {
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+      font-size: 1.1em;
+      padding-bottom: 0.5rem;
+
+      &:not(:first-of-type) {
+        margin-top: 1rem;
+      }
+
+      &:not(:last-of-type) {
+        border-bottom: 1px solid $c11;
       }
     }
 
     ul {
       list-style-type: none;
       margin: 0;
+
       li {
-        &:not(:last-of-type) {
-          margin-bottom: 0.5rem;
-        }
+        display: flex;
+        align-items: center;
+        font-size: 0.8em;
 
-        > div {
-          display: flex;
-          align-items: center;
-
-          .loading {
-            margin-left: 0.6rem;
-          }
-        }
-
-        li {
-          margin-top: 0.5rem;
-          font-size: 0.8em;
-          &::before {
-            content: "-";
-            font-weight: 700;
-            display: inline-block;
-            margin-right: 0.7rem;
-          }
+        &::before {
+          position: relative;
+          transform: translateY(1px);
+          content: "•";
+          display: inline-block;
+          color: $c3;
+          margin-right: 0.6rem;
+          font-size: 2em;
+          line-height: 100%;
         }
       }
     }
