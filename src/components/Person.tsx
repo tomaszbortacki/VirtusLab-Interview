@@ -31,7 +31,7 @@ const Person = ({
       if (exist) setTitles((prevState) => [...prevState, exist]);
       else
         await axios
-          .get(film)
+          .get(film.replace("http", window.location.protocol))
           .then((res) => {
             const title = res.data.title;
             setTitleBase((prevState: any) => [
