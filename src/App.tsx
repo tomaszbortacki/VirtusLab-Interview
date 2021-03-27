@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./css/style.scss";
 import { Container } from "react-bootstrap";
-import { PersonInterface, PeopleInterface } from "./components/Interfaces";
+import {
+  PersonInterface,
+  PeopleInterface,
+  TitleInterface,
+} from "./components/Interfaces";
 import API from "./Api";
 import Person from "./components/Person";
 import Loading from "./components/Loading";
@@ -14,6 +18,7 @@ function App() {
   const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
   const [people, setPeople] = useState<People>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [titleBase, setTitleBase] = useState<TitleInterface>([]);
 
   const fetchPeopleData = async (number = 10) => {
     for (let i = numberOfPeople; i < numberOfPeople + number; i++) {
@@ -53,7 +58,14 @@ function App() {
         <section className="main__list">
           {people
             ? people.map((person: PersonInterface, key: number) => {
-                return <Person id={key} person={person} key={key} />;
+                return (
+                  <Person
+                    person={person}
+                    key={key}
+                    titleBase={titleBase}
+                    setTitleBase={setTitleBase}
+                  />
+                );
               })
             : ""}
           {loading ? <Loading /> : ""}

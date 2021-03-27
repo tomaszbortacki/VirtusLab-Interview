@@ -3,11 +3,18 @@ interface PersonInterface {
   birth_year: string;
   gender: string;
   height: string;
-  films: object;
+  films: string[];
 }
 
 interface PeopleInterface {
   [index: number]: PersonInterface;
 }
 
-export { PersonInterface, PeopleInterface };
+interface TitleInterface {
+  [index: number]: {
+    apiUrl: string;
+    name: string;
+  };
+}
+
+export { PersonInterface, PeopleInterface, TitleInterface };

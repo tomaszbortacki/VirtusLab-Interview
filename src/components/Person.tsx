@@ -1,15 +1,60 @@
 import React, { useState } from "react";
-import { PersonInterface } from "./Interfaces";
+import { PersonInterface, TitleInterface } from "./Interfaces";
+import Loading from "./Loading";
+import axios from "axios";
 
-const Person = (props: { id: number; person: PersonInterface }) => {
-  const { name, birth_year, gender, height, films } = props.person;
+const Person = ({
+  person,
+  titleBase,
+  setTitleBase,
+}: {
+  person: PersonInterface;
+  titleBase: TitleInterface;
+}) => {
+  const { name, birth_year, gender, height, films } = person;
   const [personActive, setPersonActive] = useState<boolean>(false);
+  const [titles, setTitles] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [end, setEnd] = useState<boolean>(false);
+
+  const fetchPersonData = async () => {
+    if (end || personActive) return;
+
+    for (const film of films) {
+      const exist: string = titleBase.reduce(
+        (curr: string, { apiUrl, name }: { apiUrl: string; name: string }) =>
+          apiUrl === film ? name : curr,
+        ""
+      );
+
+      if (exist) setTitles((prevState) => [...prevState, exist]);
+      else
+        await axios
+          .get(film)
+          .then((res) => {
+            const title = res.data.title;
+            setTitleBase((prevState) => [
+              ...prevState,
+              { apiUrl: film, name: title },
+            ]);
+            setTitles((prevState) => [...prevState, title]);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    }
+    setEnd(true);
+    setLoading(false);
+  };
 
   return (
     <section className={personActive ? "person person--active" : "person"}>
       <ul
         className="person__basics"
-        onClick={() => setPersonActive(!personActive)}
+        onClick={() => {
+          setPersonActive(!personActive);
+          fetchPersonData();
+        }}
       >
         <li title={name}>{name}</li>
         <li title={birth_year}>{birth_year}</li>
@@ -21,10 +66,16 @@ const Person = (props: { id: number; person: PersonInterface }) => {
           <li>Age: {birth_year.replace("BBY", "")}</li>
           <li>Height: {height}cm</li>
           <li>
-            Films:
+            <div>
+              Films <sup>({films.length})</sup>:{" "}
+              {loading ? <Loading zoom={0.5} /> : ""}
+            </div>
             <ul>
-              <li>Film title 1</li>
-              <li>Film title 2</li>
+              {titles
+                ? titles.map((title, key) => {
+                    return <li key={key}>{title}</li>;
+                  })
+                : ""}
             </ul>
           </li>
         </ul>
