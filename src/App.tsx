@@ -1,42 +1,76 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./css/style.scss";
 import { Container } from "react-bootstrap";
-import { PersonIterface } from "./components/Interfaces";
+import { PersonInterface, PeopleInterface } from "./components/Interfaces";
+import API from "./Api";
 import Person from "./components/Person";
+import Loading from "./components/Loading";
+import axios from "axios";
 
-interface People {
-  [index: number]: PersonIterface;
-}
-
-const people: People = [
-  {
-    name: "name-test-1",
-    birth_year: "birth-test-1",
-    gender: "gender-test-1",
-  },
-  {
-    name: "name-test-2",
-    birth_year: "birth-test-2",
-    gender: "gender-test-2",
-  },
-];
+type People = Array<PeopleInterface>;
 
 function App() {
+  const [last, setLast] = useState<boolean>(false);
+  const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
+  const [people, setPeople] = useState<People>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const fetchPeopleData = async (number = 10) => {
+    for (let i = numberOfPeople; i < numberOfPeople + number; i++) {
+      await axios
+        .get(`${API}people/${i}/`)
+        .then((res) => {
+          const { name, birth_year, gender, height, films } = res.data;
+          const currentPerson: PersonInterface = {
+            name,
+            birth_year,
+            gender,
+            height,
+            films,
+          };
+          setPeople((prevState) => [...prevState, currentPerson]);
+          setLast(false);
+        })
+        .catch((err) => {
+          setLast(true);
+          console.error(err);
+        });
+    }
+    setNumberOfPeople(numberOfPeople + number);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchPeopleData();
+  }, []);
+
   return (
     <section className="main">
       <Container>
         <section className="main__top">
-          <h1>Star Wars Challange</h1>
+          <h1>Star Wars Challenge</h1>
         </section>
         <section className="main__list">
-          {people.map((person: PersonIterface, key: number) => {
-            return <Person id={key} person={person} key={key} />;
-          })}
+          {people
+            ? people.map((person: PersonInterface, key: number) => {
+                return <Person id={key} person={person} key={key} />;
+              })
+            : ""}
+          {loading ? <Loading /> : ""}
         </section>
         <section className="main__bottom">
-          <button>
-            <span>Load more (5)</span>
-          </button>
+          {!last ? (
+            <button
+              onClick={() => {
+                setLoading(true);
+                fetchPeopleData(5);
+              }}
+            >
+              <span>Load more (5)</span>
+            </button>
+          ) : (
+            ""
+          )}
         </section>
       </Container>
     </section>
