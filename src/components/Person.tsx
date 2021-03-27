@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { PersonIterface } from "./Interfaces";
+import { PersonInterface } from "./Interfaces";
 
-const Person = (props: { id: number; person: PersonIterface }) => {
-  const { name, birth_year, gender } = props.person;
+const Person = (props: { id: number; person: PersonInterface }) => {
+  const { name, birth_year, gender, height, films } = props.person;
   const [personActive, setPersonActive] = useState<boolean>(false);
+
   return (
     <section className={personActive ? "person person--active" : "person"}>
       <ul
@@ -17,8 +18,8 @@ const Person = (props: { id: number; person: PersonIterface }) => {
       </ul>
       <section className="person__more">
         <ul>
-          <li>Age: 12</li>
-          <li>Height: 177cm</li>
+          <li>Age: {birth_year.replace("BBY", "")}</li>
+          <li>Height: {height}cm</li>
           <li>
             Films:
             <ul>
