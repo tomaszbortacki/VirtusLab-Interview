@@ -10,6 +10,7 @@ const Person = ({
 }: {
   person: PersonInterface;
   titleBase: TitleInterface;
+  setTitleBase: any;
 }) => {
   const { name, birth_year, gender, height, films } = person;
   const [personActive, setPersonActive] = useState<boolean>(false);
@@ -33,7 +34,7 @@ const Person = ({
           .get(film)
           .then((res) => {
             const title = res.data.title;
-            setTitleBase((prevState) => [
+            setTitleBase((prevState: any) => [
               ...prevState,
               { apiUrl: film, name: title },
             ]);
@@ -76,7 +77,7 @@ const Person = ({
         <section className="person__desc">
           <h3>Age: {birth_year.replace("BBY", "")}</h3>
           <h3>Height: {height}cm</h3>
-          <h3>Films:</h3>
+          <h3>Films:{loading ? <Loading zoom={0.4} /> : ""}</h3>
           <ul>
             {titles
               ? titles.map((title, key) => {
