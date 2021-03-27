@@ -39,7 +39,6 @@ const Person = ({
               { apiUrl: film, name: title },
             ]);
             setTitles((prevState) => [...prevState, title]);
-            console.log(film.replace("http:", window.location.protocol));
           })
           .catch((err) => {
             console.log(err);
