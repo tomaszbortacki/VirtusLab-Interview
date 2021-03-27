@@ -1,4 +1,4 @@
-interface PersonInterface {
+export interface PersonInterface {
   name: string;
   birth_year: string;
   gender: string;
@@ -6,15 +6,14 @@ interface PersonInterface {
   films: string[];
 }
 
-interface PeopleInterface {
+export interface PeopleInterface {
   [index: number]: PersonInterface;
 }
 
-interface TitleInterface {
+export interface TitleInterface {
   [index: number]: {
     apiUrl: string;
     name: string;
   };
+  reduce: any;
 }
-
-export { PersonInterface, PeopleInterface, TitleInterface };

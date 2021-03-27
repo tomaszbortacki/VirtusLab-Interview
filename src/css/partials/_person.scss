@@ -90,6 +90,12 @@
       margin-bottom: 0;
       font-size: 1.1em;
       padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+
+      div {
+        padding-left: 1rem;
+      }
 
       &:not(:first-of-type) {
         margin-top: 1rem;

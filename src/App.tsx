@@ -33,7 +33,7 @@ function App() {
             height,
             films,
           };
-          setPeople((prevState) => [...prevState, currentPerson]);
+          setPeople((prevState: any) => [...prevState, currentPerson]);
           setLast(false);
         })
         .catch((err) => {
@@ -57,7 +57,7 @@ function App() {
         </section>
         <section className="main__list">
           {people
-            ? people.map((person: PersonInterface, key: number) => {
+            ? people.map((person: any, key: number) => {
                 return (
                   <Person
                     person={person}
