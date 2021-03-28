@@ -20,14 +20,7 @@ const PersonMore = ({ age, height, films }: PersonMoreInterface) => {
 
   const dispatch = useDispatch();
 
-  const fetchMovie = async (url: string) => {
-    return await axios
-      .get(url.replace("http:", window.location.protocol))
-      .then((res) => res.data);
-  };
-
   const loadMovies = async (url: string) => {
-    setLoading(true);
     let exists: string = "";
 
     if (moviesList.length > 0) {
@@ -38,12 +31,11 @@ const PersonMore = ({ age, height, films }: PersonMoreInterface) => {
     }
 
     if (exists) {
-      setLoading(false);
       setMovies((prevState: string[]) => [...prevState, exists]);
     } else {
-      const movie = fetchMovie(url);
-
-      movie
+      await axios
+        .get(url.replace("http:", window.location.protocol))
+        .then((res) => res.data)
         .then((data) => {
           const title = data.title;
 
@@ -58,15 +50,18 @@ const PersonMore = ({ age, height, films }: PersonMoreInterface) => {
           });
           setMovies((prevState: string[]) => [...prevState, title]);
         })
-        .then(() => {
-          setLoading(false);
-        })
+        .then(() => {})
         .catch((err) => console.error(err));
     }
   };
 
+  const fetchMovies = async (films: string[] = []) => {
+    if (films) for (const url of films) await loadMovies(url);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    for (const url of films) loadMovies(url);
+    fetchMovies(films);
   }, []);
 
   return (
