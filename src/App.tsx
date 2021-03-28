@@ -16,16 +16,12 @@ function App() {
     (state) => state.people
   );
 
-  const fetchPerson = async (ID: number) => {
-    return await axios.get(`${api}people/${ID}/`).then((res) => res.data);
-  };
-
   const dispatch = useDispatch();
 
   const addPerson = async (personID: number) => {
-    const person = fetchPerson(personID);
-
-    person
+    await axios
+      .get(`${api}people/${personID}/`)
+      .then((res) => res.data)
       .then((data) => {
         dispatch({
           type: "ADD_PERSON",
@@ -35,20 +31,19 @@ function App() {
         });
         setLast(false);
       })
-      .then(() => {
-        setLoading(false);
-      })
       .catch((err) => {
         console.log(err);
-        setLoading(false);
         setLast(true);
       });
   };
 
   const addPeople = async (number = 10) => {
     setLoading(true);
+
     const size = people.length + 1;
-    for (let i = size; i < size + number; i++) addPerson(i);
+    for (let i = size; i < size + number; i++) await addPerson(i);
+
+    setLoading(false);
   };
 
   useEffect(() => {
