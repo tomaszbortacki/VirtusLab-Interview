@@ -1,52 +1,59 @@
 import React, { useEffect, useState } from "react";
 import "./css/style.scss";
 import { Container } from "react-bootstrap";
-import {
-  PersonInterface,
-  PeopleInterface,
-  TitleInterface,
-} from "./components/Interfaces";
-import API from "./Api";
-import Person from "./components/Person";
-import Loading from "./components/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { PeopleState } from "./peopleReducer";
 import axios from "axios";
-
-type People = Array<PeopleInterface>;
+import api from "./api";
+import Loading from "./components/Loading";
+import Person from "./components/Person";
 
 function App() {
-  const [last, setLast] = useState<boolean>(false);
-  const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
-  const [people, setPeople] = useState<People>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [titleBase, setTitleBase] = useState<TitleInterface>([]);
+  const [last, setLast] = useState<boolean>(false);
 
-  const fetchPeopleData = async (number = 10) => {
-    for (let i = numberOfPeople; i < numberOfPeople + number; i++) {
-      await axios
-        .get(`${API}people/${i}/`)
-        .then((res) => {
-          const { name, birth_year, gender, height, films } = res.data;
-          const currentPerson: PersonInterface = {
-            name,
-            birth_year,
-            gender,
-            height,
-            films,
-          };
-          setPeople((prevState: any) => [...prevState, currentPerson]);
-          setLast(false);
-        })
-        .catch((err) => {
-          setLast(true);
-          console.error(err);
+  const people = useSelector<PeopleState, PeopleState["people"]>(
+    (state) => state.people
+  );
+
+  const fetchPerson = async (ID: number) => {
+    return await axios.get(`${api}people/${ID}/`).then((res) => res.data);
+  };
+
+  const dispatch = useDispatch();
+
+  const addPerson = (personID: number) => {
+    const person = fetchPerson(personID);
+
+    person
+      .then((data) => {
+        dispatch({
+          type: "ADD_PERSON",
+          payloads: {
+            person: data,
+          },
         });
+        setLast(false);
+      })
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        setLast(true);
+      });
+  };
+
+  const addPeople = (number = 10) => {
+    setLoading(true);
+    for (let i = people.length + 1; i < people.length + number + 1; i++) {
+      addPerson(i);
     }
-    setNumberOfPeople(numberOfPeople + number);
-    setLoading(false);
   };
 
   useEffect(() => {
-    fetchPeopleData();
+    addPeople();
   }, []);
 
   return (
@@ -57,15 +64,8 @@ function App() {
         </section>
         <section className="main__list">
           {people
-            ? people.map((person: any, key: number) => {
-                return (
-                  <Person
-                    person={person}
-                    key={key}
-                    titleBase={titleBase}
-                    setTitleBase={setTitleBase}
-                  />
-                );
+            ? people.map((person, key) => {
+                return <Person person={person} key={key} />;
               })
             : ""}
           {loading ? <Loading /> : ""}
@@ -74,8 +74,7 @@ function App() {
           {!last ? (
             <button
               onClick={() => {
-                setLoading(true);
-                fetchPeopleData(5);
+                addPeople(5);
               }}
             >
               <span>Load more (5)</span>
