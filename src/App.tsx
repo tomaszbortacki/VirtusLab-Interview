@@ -22,7 +22,7 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const addPerson = (personID: number) => {
+  const addPerson = async (personID: number) => {
     const person = fetchPerson(personID);
 
     person
@@ -45,11 +45,10 @@ function App() {
       });
   };
 
-  const addPeople = (number = 10) => {
+  const addPeople = async (number = 10) => {
     setLoading(true);
-    for (let i = people.length + 1; i < people.length + number + 1; i++) {
-      addPerson(i);
-    }
+    const size = people.length + 1;
+    for (let i = size; i < size + number; i++) addPerson(i);
   };
 
   useEffect(() => {
