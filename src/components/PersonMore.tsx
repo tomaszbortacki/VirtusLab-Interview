@@ -21,21 +21,26 @@ const PersonMore = ({ age, height, films }: PersonMoreInterface) => {
   const dispatch = useDispatch();
 
   const fetchMovie = async (url: string) => {
-    return await axios.get(url).then((res) => res.data);
+    return await axios
+      .get(url.replace("http:", window.location.protocol))
+      .then((res) => res.data);
   };
 
-  const loadMovies = (url: string) => {
+  const loadMovies = async (url: string) => {
+    setLoading(true);
     let exists: string = "";
+
     if (moviesList.length > 0) {
-      setLoading(false);
       exists = moviesList.reduce(
         (selected, curr) => (curr.path === url ? curr.name : selected),
         ""
       );
     }
 
-    if (exists) setMovies((prevState: string[]) => [...prevState, exists]);
-    else {
+    if (exists) {
+      setLoading(false);
+      setMovies((prevState: string[]) => [...prevState, exists]);
+    } else {
       const movie = fetchMovie(url);
 
       movie
@@ -56,7 +61,7 @@ const PersonMore = ({ age, height, films }: PersonMoreInterface) => {
         .then(() => {
           setLoading(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
   };
 
