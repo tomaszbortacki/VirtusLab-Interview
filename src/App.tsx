@@ -11,6 +11,8 @@ import Person from "./components/Person";
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [last, setLast] = useState<boolean>(false);
+  const [numberOf, setNumberOf] = useState<number>(1);
+  const [lock, setLock] = useState<boolean>(false);
 
   const people = useSelector<PeopleState, PeopleState["people"]>(
     (state) => state.people
@@ -38,10 +40,14 @@ function App() {
   };
 
   const addPeople = async (number = 10) => {
+    if (last) return;
+
     setLoading(true);
 
-    const size = people.length + 1;
+    const size = numberOf;
+
     for (let i = size; i < size + number; i++) await addPerson(i);
+    setNumberOf(numberOf + number);
 
     setLoading(false);
   };
@@ -49,6 +55,24 @@ function App() {
   useEffect(() => {
     addPeople();
   }, []);
+
+  useEffect(() => {
+    const loadOnScroll = async () => {
+      const pageY = Math.ceil(window.pageYOffset + window.innerHeight);
+      const scrollHeight = Math.ceil(document.documentElement.scrollHeight);
+
+      if (pageY === scrollHeight && !lock) {
+        setLock(true);
+        await addPeople(5);
+        setLock(false);
+      }
+    };
+
+    window.addEventListener("wheel", loadOnScroll);
+    return () => {
+      window.removeEventListener("wheel", loadOnScroll);
+    };
+  }, [numberOf, lock]);
 
   return (
     <section className="main">
@@ -63,19 +87,6 @@ function App() {
               })
             : ""}
           {loading ? <Loading /> : ""}
-        </section>
-        <section className="main__bottom">
-          {!last ? (
-            <button
-              onClick={() => {
-                addPeople(5);
-              }}
-            >
-              <span>Load more (5)</span>
-            </button>
-          ) : (
-            ""
-          )}
         </section>
       </Container>
     </section>
