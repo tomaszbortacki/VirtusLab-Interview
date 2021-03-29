@@ -79,14 +79,14 @@
       flex-basis: 10%;
       transition: transform $e1;
       will-change: transform;
-      color: $c3;
       border: none;
 
-      div {
+      svg {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) scale(0.7);
+        fill: $c3;
       }
     }
   }
