@@ -30,9 +30,8 @@ const PersonMore = ({ age, height, films }: PersonMoreInterface) => {
       );
     }
 
-    if (exists) {
-      setMovies((prevState: string[]) => [...prevState, exists]);
-    } else {
+    if (exists) setMovies((prevState: string[]) => [...prevState, exists]);
+    else {
       await axios
         .get(url.replace("http:", window.location.protocol))
         .then((res) => res.data)
