@@ -69,8 +69,10 @@ function App() {
     };
 
     window.addEventListener("wheel", loadOnScroll);
+    window.addEventListener("touchmove", loadOnScroll);
     return () => {
       window.removeEventListener("wheel", loadOnScroll);
+      window.removeEventListener("touchmove", loadOnScroll);
     };
   }, [numberOf, lock]);
 
