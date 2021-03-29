@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/StarWarsChallenge/static/css/main.ec9726d2.chunk.css",
-    "main.js": "/StarWarsChallenge/static/js/main.0ef755f2.chunk.js",
-    "main.js.map": "/StarWarsChallenge/static/js/main.0ef755f2.chunk.js.map",
+    "main.css": "/StarWarsChallenge/static/css/main.dbdbca55.chunk.css",
+    "main.js": "/StarWarsChallenge/static/js/main.5c492582.chunk.js",
+    "main.js.map": "/StarWarsChallenge/static/js/main.5c492582.chunk.js.map",
     "runtime-main.js": "/StarWarsChallenge/static/js/runtime-main.fb0dbc65.js",
     "runtime-main.js.map": "/StarWarsChallenge/static/js/runtime-main.fb0dbc65.js.map",
     "static/css/2.4c97ca4f.chunk.css": "/StarWarsChallenge/static/css/2.4c97ca4f.chunk.css",
@@ -10,14 +10,14 @@
     "static/js/2.03f3b23e.chunk.js.map": "/StarWarsChallenge/static/js/2.03f3b23e.chunk.js.map",
     "index.html": "/StarWarsChallenge/index.html",
     "static/css/2.4c97ca4f.chunk.css.map": "/StarWarsChallenge/static/css/2.4c97ca4f.chunk.css.map",
-    "static/css/main.ec9726d2.chunk.css.map": "/StarWarsChallenge/static/css/main.ec9726d2.chunk.css.map",
+    "static/css/main.dbdbca55.chunk.css.map": "/StarWarsChallenge/static/css/main.dbdbca55.chunk.css.map",
     "static/js/2.03f3b23e.chunk.js.LICENSE.txt": "/StarWarsChallenge/static/js/2.03f3b23e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.fb0dbc65.js",
     "static/css/2.4c97ca4f.chunk.css",
     "static/js/2.03f3b23e.chunk.js",
-    "static/css/main.ec9726d2.chunk.css",
-    "static/js/main.0ef755f2.chunk.js"
+    "static/css/main.dbdbca55.chunk.css",
+    "static/js/main.5c492582.chunk.js"
   ]
 }
