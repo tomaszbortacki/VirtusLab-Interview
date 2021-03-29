@@ -61,7 +61,7 @@ function App() {
       const pageY = Math.ceil(window.pageYOffset + window.innerHeight);
       const scrollHeight = Math.ceil(document.documentElement.scrollHeight);
 
-      if (pageY === scrollHeight && !lock) {
+      if (pageY >= scrollHeight && !lock) {
         setLock(true);
         await addPeople(5);
         setLock(false);
