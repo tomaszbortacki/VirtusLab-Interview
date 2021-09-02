@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/StarWarsChallenge/static/css/main.dbdbca55.chunk.css",
-    "main.js": "/StarWarsChallenge/static/js/main.66cf53e0.chunk.js",
-    "main.js.map": "/StarWarsChallenge/static/js/main.66cf53e0.chunk.js.map",
-    "runtime-main.js": "/StarWarsChallenge/static/js/runtime-main.fb0dbc65.js",
-    "runtime-main.js.map": "/StarWarsChallenge/static/js/runtime-main.fb0dbc65.js.map",
-    "static/css/2.4c97ca4f.chunk.css": "/StarWarsChallenge/static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.03f3b23e.chunk.js": "/StarWarsChallenge/static/js/2.03f3b23e.chunk.js",
-    "static/js/2.03f3b23e.chunk.js.map": "/StarWarsChallenge/static/js/2.03f3b23e.chunk.js.map",
-    "index.html": "/StarWarsChallenge/index.html",
-    "static/css/2.4c97ca4f.chunk.css.map": "/StarWarsChallenge/static/css/2.4c97ca4f.chunk.css.map",
-    "static/css/main.dbdbca55.chunk.css.map": "/StarWarsChallenge/static/css/main.dbdbca55.chunk.css.map",
-    "static/js/2.03f3b23e.chunk.js.LICENSE.txt": "/StarWarsChallenge/static/js/2.03f3b23e.chunk.js.LICENSE.txt"
+    "main.css": "/VirtusLab-Interview/static/css/main.95c4db63.chunk.css",
+    "main.js": "/VirtusLab-Interview/static/js/main.1365a77e.chunk.js",
+    "main.js.map": "/VirtusLab-Interview/static/js/main.1365a77e.chunk.js.map",
+    "runtime-main.js": "/VirtusLab-Interview/static/js/runtime-main.bb2a3ec9.js",
+    "runtime-main.js.map": "/VirtusLab-Interview/static/js/runtime-main.bb2a3ec9.js.map",
+    "static/css/2.27dd871e.chunk.css": "/VirtusLab-Interview/static/css/2.27dd871e.chunk.css",
+    "static/js/2.3640d403.chunk.js": "/VirtusLab-Interview/static/js/2.3640d403.chunk.js",
+    "static/js/2.3640d403.chunk.js.map": "/VirtusLab-Interview/static/js/2.3640d403.chunk.js.map",
+    "index.html": "/VirtusLab-Interview/index.html",
+    "static/css/2.27dd871e.chunk.css.map": "/VirtusLab-Interview/static/css/2.27dd871e.chunk.css.map",
+    "static/css/main.95c4db63.chunk.css.map": "/VirtusLab-Interview/static/css/main.95c4db63.chunk.css.map",
+    "static/js/2.3640d403.chunk.js.LICENSE.txt": "/VirtusLab-Interview/static/js/2.3640d403.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.fb0dbc65.js",
-    "static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.03f3b23e.chunk.js",
-    "static/css/main.dbdbca55.chunk.css",
-    "static/js/main.66cf53e0.chunk.js"
+    "static/js/runtime-main.bb2a3ec9.js",
+    "static/css/2.27dd871e.chunk.css",
+    "static/js/2.3640d403.chunk.js",
+    "static/css/main.95c4db63.chunk.css",
+    "static/js/main.1365a77e.chunk.js"
   ]
 }
