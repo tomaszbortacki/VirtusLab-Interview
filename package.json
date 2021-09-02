@@ -1,5 +1,5 @@
 {
-  "homepage": "http://tomaszbortacki.github.io/StarWarsChallenge",
+  "homepage": "http://tomaszbortacki.github.io/VirtusLab-Interview",
   "name": "virtuslab",
   "version": "0.1.0",
   "private": true,
@@ -14,7 +14,7 @@
     "@types/react-redux": "^7.1.16",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
-    "node-sass": "^5.0.0",
+    "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
